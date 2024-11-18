@@ -1,0 +1,1 @@
+Developed a simple e-commerce website using Django and Bootstrap, featuring an intuitive user interface and seamless functionality for browsing, adding to cart, and purchasing products. The project demonstrates proficiency in web development and responsive design.
