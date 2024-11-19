@@ -35,7 +35,14 @@ Your Cart | ShopKart
                     <td></td>
                     <td colspan="2"><b>Total Amount</b></td>
                     <td id="net">0</td>
-                    <td><a href="#" onclick="return confirm('Are You Sure ? to Checkout this Product')" class="btn btn-success btn-sm"><i class="fa fa-bag-shopping"></i>  Checkout</a></td>
+                    <td>
+                        <form action="{% url 'checkout' %}" method="post" style="display:inline;">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-success btn-sm" onclick="return confirm('Are You Sure ? to Checkout this Product')">
+                                <i class="fa fa-bag-shopping"></i> Checkout
+                            </button>
+                        </form>
+                    </td>
                  </tr>
             </table>
         </div>

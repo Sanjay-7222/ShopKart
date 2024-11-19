@@ -145,28 +145,9 @@ def product_details(request,cname,pname):
         messages.error(request,"No Such Category Found")
         return redirect('collection')
     
-# @login_required
-# def checkout(request):
-#     cart_items = Cart.objects.filter(user=request.user)
-#     if not cart_items:
-#         messages.error(request, "Your cart is empty!")
-#         return redirect('cart')  # Redirect to cart page if empty
-
-#     for item in cart_items:
-#         # Calculate total cost for each item
-#         total_cost = item.product.selling_price * item.product_qty
-        
-#         # Save each cart item as a customer record with total cost
-#         Customer.objects.create(
-#             user=request.user,
-#             product=item.product,
-#             name=request.user.username,  # Or use another name if available
-#             quantity=item.product_qty,
-#             total_cost=total_cost  # Save total cost in Customer
-#         )
-
-#     # Clear the cart after checkout
-#     cart_items.delete()
-    
-#     messages.success(request, "Checkout successful! Your order has been placed.")
-#     return redirect('cart')
+def checkout(request):
+    if request.method == "POST":
+        user_cart = Cart.objects.filter(user=request.user)
+        user_cart.delete()
+        return redirect('cart')
+    return redirect('cart')
