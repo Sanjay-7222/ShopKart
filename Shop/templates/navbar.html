@@ -9,6 +9,9 @@
           <li class="nav-item">
             <a class="nav-link active" aria-current="page" href="{% url 'home' %}"><i class="fa fa-home"></i>  Home</a>
           </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'collection' %}"><i class="fa fa-cubes"></i>  Collections</a>
+          </li>
           {% if request.user.is_authenticated %}
           <li class="nav-item">
             <a class="nav-link" href="#"><i class="fa fa-user"></i>  {{request.user}}</a>
@@ -30,9 +33,6 @@
               <a class="nav-link" href="{% url 'register' %}"><i class="fa fa-users"></i>  Register</a>
             </li> -->
           {% endif %}
-          <li class="nav-item">
-            <a class="nav-link" href="{% url 'collection' %}"><i class="fa fa-cubes"></i>  Collections</a>
-          </li>
         </ul>
         <!-- <form class="d-flex">
           <input class="form-control me-2" name="q" type="search" placeholder="Search" aria-label="Search">
