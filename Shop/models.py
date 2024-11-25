@@ -35,18 +35,30 @@ class Product(models.Model):
         return self.name 
     
 class Cart(models.Model):
-    user = models.ForeignKey(User,on_delete=models.CASCADE)
-    product = models.ForeignKey(Product,on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    product = models.ForeignKey(Product, on_delete=models.CASCADE)
     product_qty = models.IntegerField(null=False, blank=False)
     created_at = models.DateTimeField(auto_now_add=True)
+    total_cost = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True)
 
+    def save(self, *args, **kwargs):
+        self.total_cost = self.product_qty * self.product.selling_price
+        super(Cart, self).save(*args, **kwargs)
 
-    @property
-    def total_cost(self):
-        return self.product_qty * self.product.selling_price
     
 class Favourite(models.Model):
     user = models.ForeignKey(User,on_delete=models.CASCADE)
     product = models.ForeignKey(Product,on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
 
+from phonenumber_field.modelfields import PhoneNumberField
+
+class Checkout(models.Model):
+    user = models.ForeignKey(User,on_delete=models.CASCADE)
+    product = models.ForeignKey(Product,on_delete=models.CASCADE)
+    total_cost = models.DecimalField(max_digits=10, decimal_places=2, null=True,blank=True)
+    user_address = models.TextField(max_length=500 , null=False, blank=False)
+    user_phn_no = PhoneNumberField(unique=True,null=False,blank=False)
+    def save(self, *args, **kwargs):
+        self.total_cost = self.product_qty * self.product.selling_price
+        super(Cart, self).save(*args, **kwargs)
