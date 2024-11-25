@@ -51,3 +51,68 @@ a {
     text-align: center;
 }
 
+.card {
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    overflow: hidden;
+    transition: transform 0.3s, box-shadow 0.3s;
+    background-color: #fff;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+  }
+  
+  .card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  }
+  
+  .card img {
+    width: 100%;
+    height: auto;
+    display: block;
+    transition: transform 0.3s;
+  }
+  
+  .card:hover img {
+    transform: scale(1.05);
+  }
+  
+  .card-body {
+    padding: 15px;
+    text-align: center;
+  }
+  
+  .card-title {
+    font-size: 1.2rem;
+    color: #007BFF;
+    margin-bottom: 10px;
+    font-weight: bold;
+    text-transform: capitalize;
+  }
+  
+  .card-text {
+    font-size: 0.95rem;
+    margin-top: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: #333;
+  }
+  
+  .card hr {
+    margin: 0;
+    border: none;
+    border-top: 1px solid #e6e6e6;
+    width: 80%;
+    margin: 10px auto;
+  }
+  
+
+  .card a {
+    text-decoration: none;
+    color: inherit;
+  }
+  
+  .card a:hover .card-title {
+    color: #0056b3;
+  }

@@ -23,16 +23,16 @@ Products | ShopKart
             {% for item in products %}
             <div class="col-md-4 col-lg-3">
                 <div class="card my-3">
-                    <img class="card-image-top" src="{{item.product_image.url}}" alt="products" style="height: 250px;">
-                    <hr style="border-color: #b8bfc2;">
                     <a href="{% url 'product_details' category_name item.name %}">
-                        <div class="card-body">
-                            <h5 class="card-title text-primary">{{ item.name }}</h5>
-                            <p class="card-text">
-                                <span class="float-start old_price"><s>Rs.{{item.original_price | stringformat:'d'}}</s></span>
-                                <span class="float-end new_price"><b>Rs.{{item.selling_price | stringformat:'d'}}</b></span>
-                            </p>
-                        </div>
+                        <img class="card-image-top" src="{{item.product_image.url}}" alt="products" style="height: 250px;">
+                        <hr style="border-color: #b8bfc2;">
+                            <div class="card-body">
+                                <h5 class="card-title text-primary">{{ item.name }}</h5>
+                                <p class="card-text">
+                                    <span class="float-start old_price"><s>Rs.{{item.original_price | stringformat:'d'}}</s></span>
+                                    <span class="float-end new_price"><b>Rs.{{item.selling_price | stringformat:'d'}}</b></span>
+                                </p>
+                            </div>
                     </a>
                 </div>
             </div>

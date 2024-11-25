@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+/* Card container */
+.card {
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  overflow: hidden;
+  transition: transform 0.3s, box-shadow 0.3s;
+  background-color: #fff;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+}
+
+/* Hover effect */
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+/* Product image */
+.card img {
+  width: 100%;
+  height: auto;
+  display: block;
+  transition: transform 0.3s;
+}
+
+.card:hover img {
+  transform: scale(1.05);
+}
+
+/* Card body */
+.card-body {
+  padding: 15px;
+  text-align: center;
+}
+
+/* Product name */
+.card-title {
+  font-size: 1.2rem;
+  color: #007BFF;
+  margin-bottom: 10px;
+  font-weight: bold;
+  text-transform: capitalize;
+}
+
+/* Prices */
+.card-text {
+  font-size: 0.95rem;
+  margin-top: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: #333;
+}
+
+.old_price {
+  color: #888;
+  font-size: 0.9rem;
+}
+
+.new_price {
+  color: #28A745;
+  font-size: 1.1rem;
+  font-weight: bold;
+}
+
+/* Divider */
+.card hr {
+  margin: 0;
+  border: none;
+  border-top: 1px solid #e6e6e6;
+  width: 80%;
+  margin: 10px auto;
+}
+
+/* Link styling */
+.card a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.card a:hover .card-title {
+  color: #0056b3;
+}
+
+    </style>
+</head>
+<body>
+    <div class="col-md-4 col-lg-3">
+        <div class="card my-3">
+            <img class="card-image-top" src="./static/uploads/20241116111727acity-hero.webp" alt="products" style="height: 250px;">
+            <hr style="border-color: #b8bfc2;">
+            <a href="">
+                <div class="card-body">
+                    <h5 class="card-title text-primary">this</h5>
+                    <p class="card-text">
+                        <span class="float-start old_price"><s>Rs.199</s></span>
+                        <span class="float-end new_price"><b>Rs.149</b></span>
+                    </p>
+                </div>
+            </a>
+        </div>
+    </div>      
+</body>
+</html>

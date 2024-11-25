@@ -29,13 +29,13 @@ Collections | ShopKart
             {% for item in category %}
             <div class="col-md-4 col-lg-3">
                 <div class="card my-3">
-                    <img class="card-image-top" src="{{item.image.url}}" alt="categories" style="height: 200px;">
                     <a href="{% url 'collection' item.name %}">
-                        <hr style="border-color: #b8bfc2;">
-                        <div class="card-body">
-                            <h5 class="card-title text-primary">{{ item.name }}</h5>
-                            <p class="card-text">{{item.description}}</p>
-                        </div>
+                        <img class="card-image-top" src="{{item.image.url}}" alt="categories" style="height: 200px;">
+                            <hr style="border-color: #b8bfc2;">
+                            <div class="card-body">
+                                <h5 class="card-title text-primary">{{ item.name }}</h5>
+                                <p class="card-text">{{item.description}}</p>
+                            </div>
                     </a>
                 </div>
             </div>
