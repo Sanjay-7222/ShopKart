@@ -10,7 +10,7 @@ Your Cart | ShopKart
                 <h4 class="mb-3">Cart Items</h4>
                 <hr style="border-color: #b8bfc2 ;">
             </div>
-
+            {% if cart %}
             <table class="table table-striped">
                  <tr>
                     <th>Image</th>
@@ -36,15 +36,60 @@ Your Cart | ShopKart
                     <td colspan="2"><b>Total Amount</b></td>
                     <td id="net">0</td>
                     <td>
-                        <form action="{% url 'checkout' %}" method="post" style="display:inline;">
-                            {% csrf_token %}
-                            <button type="submit" class="btn btn-success btn-sm" onclick="return confirm('Are You Sure ? to Checkout this Product')">
+                        <div>
+                            <button type="submit" class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#formModal">
                                 <i class="fa fa-bag-shopping"></i> Checkout
                             </button>
-                        </form>
+                            <div class="modal fade" id="formModal" tabindex="-1" aria-labelledby="formModalLabel" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered">
+                                  <div class="modal-content">
+                                    <div class="modal-header">
+                                      <h5 class="modal-title" id="formModalLabel">Checkout Form</h5>
+                                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <form action="{% url 'checkout' %}" method="POST">
+                                      <div class="modal-body">
+                                        {% csrf_token %}
+                                        <div class="mb-3">
+                                          <label for="name" class="form-label">Name</label>
+                                          <input type="text" class="form-control" id="name" name="name" value="{{request.user}}" readonly>
+                                        </div>
+                                        
+                                        <div class="mb-3">
+                                          <label for="email" class="form-label">Email</label>
+                                          <input type="email" class="form-control" id="email" name="email" value="{{request.user.email}}">
+                                        </div>
+
+                                        <div class="mb-3">
+                                            <label for="phn_no" class="form-label">Phone Number</label>
+                                            <input type="tel" class="form-control" id="user_phn_no" name="user_phn_no" placeholder="9876543210" required>
+                                          </div>
+                                        
+                                        <div class="mb-3">
+                                          <label for="address" class="form-label">Delivery Address</label>
+                                          <textarea name="user_address" id="user_address" cols="30" class="form-control" required></textarea>
+                                        </div>
+                                      </div>
+                                      <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                        <button type="submit" class="btn btn-primary">Submit</button>
+                                      </div>
+                                    </form>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                        </div>
                     </td>
                  </tr>
             </table>
+            {% else %}
+            
+            <div class="text-center" style="margin-top: 25vh;">
+                <h4>Cart is Empty. Please Add Products in your Cart</h4>
+                <a class="btn btn-primary" href='{% url "home" %}'>Go Home</a>
+            </div>
+            {% endif %}
         </div>
     </div>
 </section>

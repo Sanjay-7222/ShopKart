@@ -116,3 +116,14 @@ a {
   .card a:hover .card-title {
     color: #0056b3;
   }
+
+  #glow a {   
+    color: #ffffff; /* Default icon color */
+    transition: color 0.3s ease, text-shadow 0.3s ease;
+  }
+
+  /* Glow Effect on Hover */
+  #glow a:hover {
+    color: #eeff00; /* Change icon color */
+    text-shadow: 0 0 10px #eeff00, 0 0 20px #eeff00, 0 0 30px #eeff00, 0 0 40px #eeff00;
+  }

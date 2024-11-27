@@ -146,8 +146,13 @@ def product_details(request,cname,pname):
         return redirect('collection')
     
 def checkout(request):
+    form = CheckoutForm()
     if request.method == "POST":
         user_cart = Cart.objects.filter(user=request.user)
-        user_cart.delete()
+        form = CheckoutForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request,"Your Products delivery at 2-5 working days")
         return redirect('cart')
-    return redirect('cart')
+    user_cart.delete()
+    return redirect('home')

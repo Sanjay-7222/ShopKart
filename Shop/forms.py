@@ -14,5 +14,5 @@ class CustomUserForm(UserCreationForm):
 
 class CheckoutForm(ModelForm):
     class Meta:
-        model = Checkout
-        fields = ['user_address','user_phn_no']
+        model = Chekout
+        fields = ['user_address']
