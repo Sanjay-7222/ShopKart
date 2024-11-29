@@ -54,11 +54,8 @@ class Favourite(models.Model):
 
 class Chekout(models.Model):
     user = models.ForeignKey(User,on_delete=models.CASCADE)
-    product = models.ForeignKey(Product,on_delete=models.CASCADE)
-    total_cost = models.DecimalField(max_digits=10, decimal_places=2, null=True,blank=True)
+    product = models.ForeignKey(Product,on_delete=models.CASCADE, null=False, blank=False)
+    total_cost = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True)
     user_address = models.TextField(max_length=500 , null=False, blank=False)
     phone_no = models.CharField(max_length=15, null=False, blank=False)
-    def save(self, *args, **kwargs):
-        self.total_cost = self.product.quantity * self.product.selling_price
-        super(Cart, self).save(*args, **kwargs)
-        
+    quantity = models.IntegerField(null=True, blank=True)

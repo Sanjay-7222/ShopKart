@@ -10,6 +10,7 @@ Your Cart | ShopKart
                 <h4 class="mb-3">Cart Items</h4>
                 <hr style="border-color: #b8bfc2 ;">
             </div>
+            {% include 'messages.html' %}
             {% if cart %}
             <table class="table table-striped">
                  <tr>
@@ -62,13 +63,19 @@ Your Cart | ShopKart
 
                                         <div class="mb-3">
                                             <label for="phn_no" class="form-label">Phone Number</label>
-                                            <input type="tel" class="form-control" id="user_phn_no" name="user_phn_no" placeholder="9876543210" required>
+                                            <input type="tel" class="form-control" id="phone_no" name="phone_no" placeholder="9876543210" required>
                                           </div>
                                         
                                         <div class="mb-3">
                                           <label for="address" class="form-label">Delivery Address</label>
                                           <textarea name="user_address" id="user_address" cols="30" class="form-control" required></textarea>
                                         </div>
+                                        {% for item in cart %}
+                                        <div class="mb-3">
+                                          <label for="quantity" class="form-label">Quantity</label>
+                                          <input type="number" name="quantity" id="quantity" class="form-control" value="{{item.product_qty}}">
+                                        </div>
+                                        {% endfor %}
                                       </div>
                                       <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>

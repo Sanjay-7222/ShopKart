@@ -79,7 +79,7 @@ WSGI_APPLICATION = 'Shopkart.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'Django_db',
+        'NAME': 'shop_kart_db',
         'HOST': 'localhost',
         'USER': 'root',
         'PASSWORD': 'sanjay@7222',

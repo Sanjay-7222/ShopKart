@@ -147,12 +147,23 @@ def product_details(request,cname,pname):
     
 def checkout(request):
     form = CheckoutForm()
+    user_cart = Cart.objects.filter(user=request.user)
     if request.method == "POST":
-        user_cart = Cart.objects.filter(user=request.user)
         form = CheckoutForm(request.POST)
         if form.is_valid():
-            form.save()
-            messages.success(request,"Your Products delivery at 2-5 working days")
-        return redirect('cart')
-    user_cart.delete()
-    return redirect('home')
+            total_cost = sum(cart_item.total_cost for cart_item in user_cart)
+            checkout_instance = form.save(commit=False)
+            checkout_instance.user = request.user
+            checkout_instance.total_cost = total_cost
+            
+            # Save the checkout instance to the database
+            checkout_instance.save()
+            
+            # Delete the items from the user's cart after successful checkout
+            user_cart.delete()
+            
+            messages.success(request, "Your Products will be delivered in 2-5 working days")
+            return redirect('cart')  # Redirect to the cart page or another page as needed
+        else:
+            messages.error(request, "There was an error in your form. Please correct it.")
+    return render(request, 'cart.html', {'form': form, 'user_cart': user_cart})
