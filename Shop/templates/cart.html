@@ -1,4 +1,5 @@
 {% extends 'main.html' %}
+{% load static %}
 {% block title %}
 Your Cart | ShopKart
 {% endblock title %}
@@ -92,7 +93,8 @@ Your Cart | ShopKart
             </table>
             {% else %}
             
-            <div class="text-center" style="margin-top: 25vh;">
+            <div class="text-center" style="margin-top: 8vh;">
+              <img src="{% static 'images/6.png' %}" alt="">
                 <h4>Cart is Empty. Please Add Products in your Cart</h4>
                 <a class="btn btn-primary" href='{% url "home" %}'>Go Home</a>
             </div>

@@ -4,7 +4,7 @@ Login | Shopkart
 {% endblock title %}
 
 {% block content %}
-<div class="container" style="margin-top: 70px;">
+<div class="container" style="margin-top: 70px;" id="bg">
     <div class="row">
         <div class="col-12">
             <h4 class="mb-3">Login Page</h4>
@@ -12,25 +12,41 @@ Login | Shopkart
             {% include 'messages.html' %}
         </div>
     </div>
-    <section class="py-4">
+    <section class="py-4 d-flex align-items-center justify-content-center">
         <div class="container">
-            <div class="row">
-                <div class="col-6">
-                    <form action="" method="post">
+            <div class="row justify-content-center">
+                <div class="col-12 col-md-6">
+                    <form action="" method="post" class="shadow p-4 rounded">
                         {% csrf_token %}
                         <div class="mb-4">
                             <label for="" class="form-label">Username</label>
                             <input type="text" name="username" id="username" class="form-control" placeholder="Enter Username">
+                        </div>
+
                         <div class="mb-4">
                             <label for="" class="form-label">Password</label>
-                            <input class="form-control" type="password" name="password" id="password" placeholder="Enter Password">
+                            <input class="form-control" type="password" name="password" id="password" placeholder="Enter Password"><br>
+                            <input type="checkbox" onclick="show_password()"> Show Password
                         </div>
+
                         <button type="submit" class="btn btn-primary">Login</button>
                     </form>
-                    <p>Haven't signed up yet ? <a href="{% url 'register' %}">Sign Up</a></p>
+                    <p class="text-center mt-3">Haven't signed up yet ? <a href="{% url 'register' %}">Sign Up</a></p>
                 </div>
             </div>
         </div>
     </section>
 </div>
+<script>
+    function show_password(){
+        var x = document.getElementById("password");
+        if (x.type === "password"){
+            x.type = "text";
+        }
+
+        else{
+            x.type = "password";
+        }
+    }
+</script>
 {% endblock content %}
