@@ -8,6 +8,11 @@ from django.http import JsonResponse
 import json
 from django.db.models import Q
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.tokens import default_token_generator
+from django.utils.http  import urlsafe_base64_decode,urlsafe_base64_encode
+from django.utils.encoding import force_bytes,force_str
+from django.template.loader import render_to_string
+from django.core.mail import send_mail
 # Create your views here.
 
 def home(request):
@@ -106,18 +111,46 @@ def logout_page(request):
         messages.success(request,"Logged out Successfully")
     return redirect("home")
 
+
 def register(request):
-    form = CustomUserForm()
     if request.method == 'POST':
         form = CustomUserForm(request.POST)
         if form.is_valid():
             user = form.save(commit=False)
-            form.save()
-            login(request,user)
-            messages.success(request,"Registration Success You can Login Now..!")
-            return redirect('home')
+            user.is_active = False
+            user.save()
+            
+            token = default_token_generator.make_token(user)
+            uid = urlsafe_base64_encode(force_bytes(user.pk))
+            verification_link = request.build_absolute_uri(
+                f"/activate/{uid}/{token}"
+            )
+
+            subject = "Activate your account"
+            message = f"Hi {user.username},\n\nClick the link below to activate your account:\n\n{verification_link}\n\nIf you did not sign up, ignore this email."
+            send_mail(subject, message,"sanjay8015803208@gmail.com", [user.email], fail_silently=False)
+            messages.success(request, "Registration successful! Please check your email to activate your account.")
+            return redirect('login')
+    else:
+        form = CustomUserForm()
     return render(request, 'register.html',{'form': form})
- 
+
+def activate(request,uidb64,token):
+    try:
+        uid = force_str(urlsafe_base64_decode(uidb64))
+        user = User.objects.get(pk=uid)
+    except(TypeError,ValueError,OverflowError,User.DoesNotExist):
+        user = None
+
+    if user and default_token_generator.check_token(user,token):
+        user.is_active = True
+        user.save()
+        messages.success(request,"Your accounthas been activated! You can log in now.")
+        return redirect('login')
+    else:
+        messages.error(request,'Activation link invalid')
+        return redirect('register')
+
 def collection(request):
     category = Category.objects.filter(status = 0)
     return render(request, 'collection.html', {'category': category})
