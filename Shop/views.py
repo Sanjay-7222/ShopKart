@@ -189,14 +189,12 @@ def checkout(request):
             checkout_instance.user = request.user
             checkout_instance.total_cost = total_cost
             
-            # Save the checkout instance to the database
             checkout_instance.save()
             
-            # Delete the items from the user's cart after successful checkout
             user_cart.delete()
             
             messages.success(request, "Your Products will be delivered in 2-5 working days")
-            return redirect('cart')  # Redirect to the cart page or another page as needed
+            return redirect('cart')  
         else:
             messages.error(request, "There was an error in your form. Please correct it.")
     return render(request, 'cart.html', {'form': form, 'user_cart': user_cart})

@@ -20,7 +20,7 @@ Your Favourite | ShopKart
                  </tr>
                  {% for item in fav %}
                  <tr>
-                    <td><img src="{{item.product.product_image.url}}" height="75px" alt="{{item.product.name}}"></td>
+                    <td><a href="{% url 'product_details' item.product.category.name item.product.name %}"><img src="{{item.product.product_image.url}}" height="75px" alt="{{item.product.name}}"></a></td>
                     <td>{{item.product.name}}</td>
                     <td>{{item.product.selling_price}}</td>  
                     <td><a href="{% url 'remove_fav' item.id %}" onclick="return confirm('Are You Sure ? to Remove')" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i>  Remove</a></td>

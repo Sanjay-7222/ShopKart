@@ -13,9 +13,9 @@
             <a class="nav-link" href="{% url 'collection' %}"><i class="fa fa-cubes"></i>  Collections</a>
           </li>
           {% if request.user.is_authenticated %}
-          <li class="nav-item">
+          <!-- <li class="nav-item">
             <a class="nav-link" href="#"><i class="fa fa-user"></i>  {{request.user}}</a>
-          </li>
+          </li> -->
           <li class="nav-item">
             <a class="nav-link" href="{% url 'logout' %}"><i class="fa fa-sign-out"></i>  Logout</a>
           </li>
